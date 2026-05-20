@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="row">
+        <div class="col-md-12 text-center mb-4">
+            <h2>Hello, {{ user.username }}! Here is your Financial Overview</h2>
+            <p class="text-muted">Manage your personal transactions below.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card bg-success text-white shadow-sm h-100 p-4">
+                <h3>Total Income</h3>
+                <h2 class="display-5">$0.00</h2>
+                <a href="{% url 'add_income' %}" class="btn btn-light btn-sm mt-3 w-50">+ Add Income</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-danger text-white shadow-sm h-100 p-4">
+                <h3>Total Expenses</h3>
+                <h2 class="display-5">$0.00</h2>
+                <a href="{% url 'add_expense' %}" class="btn btn-light btn-sm mt-3 w-50">+ Add Expense</a>
+            </div>
+        </div>
+    </div>
+        <div class="row mt-5">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Recent Income Records</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for income in incomes %}
+                            <tr>
+                                <td>{{ income.title }}</td>
+                                <td><span class="badge bg-secondary">{{ income.get_category_display }}</span></td>
+                                <td class="text-success">+${{ income.amount }}</td>
+                                <td>{{ income.date }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">No income records added yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Recent Expense Records</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for expense in expenses %}
+                            <tr>
+                                <td>{{ expense.title }}</td>
+                                <td><span class="badge bg-secondary">{{ expense.get_category_display }}</span></td>
+                                <td class="text-danger">-${{ expense.amount }}</td>
+                                <td>{{ expense.date }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">No expense records added yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+
+{% else %}
+    <div class="card p-5 text-center shadow-sm">
+        <h1 class="display-4 text-primary">Welcome to Family Expense Tracker</h1>
+        <p class="lead">Track your family income, expenses, and monthly budgets all in one place.</p>
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg">Register</a>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

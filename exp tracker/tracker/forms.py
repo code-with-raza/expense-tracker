@@ -1,20 +1,24 @@
 from django import forms
-from .models import Expense, Income
-
-class ExpenseForm(forms.ModelForm):
-    class Meta:
-        model = Expense
-        fields = ['title', 'amount'] 
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., Groceries, Rent'}),
-            'amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.00'}),
-        }
+from .models import Income, Expense
 
 class IncomeForm(forms.ModelForm):
     class Meta:
         model = Income
-        fields = ['source', 'amount'] 
+        fields = ['title', 'amount', 'category', 'date', 'description', 'payment_method']
         widgets = {
-            'source': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., Salary, Freelance'}),
-            'amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.00'}),
+            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ['title', 'amount', 'category', 'date','description','payment_method']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }

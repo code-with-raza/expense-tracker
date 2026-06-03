@@ -9,5 +9,8 @@ path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='l
 path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 path('add-income/', views.add_income_view, name='add_income'),
 path('add-expense/', views.add_expense_view, name='add_expense'),
-
+path('edit-income/<int:pk>/', views.edit_income_view, name='edit_income'),
+path('edit-expense/<int:pk>/', views.edit_expense_view, name='edit_expense'),
+path('delete-income/<int:pk>/', views.delete_income_view, name='delete_income'),
+path('delete-expense/<int:pk>/', views.delete_expense_view, name='delete_expense'),
 ]

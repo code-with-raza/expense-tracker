@@ -20,12 +20,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cn+uo)f$h2ml)0dxcn1p6)5g=y3pb9m!pld4uh@y8o)prvt#32'
+import os
+from pathlib import Path
+from dotenv import load_dotenv  # NEW IMPORT
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# NEW: Load the environment variables from the .env file
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+# SECURITY WARNING: keep the secret key used in production secret!
+# NEW: Fallback to a blank string or template key if not found
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-development-key-123')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# Add your local server address and your deployment domains here:
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.render.com', '.railway.app']
 
 
 # Application definition

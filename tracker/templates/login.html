@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+            <h2 class="text-center mb-4">Family Login</h2>
+            
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success w-100 mt-3">Login</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <small class="text-muted">New to the app? <a href="{% url 'register' %}">Create an account</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

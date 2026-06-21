@@ -1,0 +1,1 @@
+web: gunicorn family_tracker.wsgi:application

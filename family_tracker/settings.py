@@ -41,7 +41,8 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-fallback-development-key-1
 DEBUG = False
 
 # Add your local server address and your deployment domains here:
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.render.com', '.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.render.com', '.railway.app',
+                 'Ahmedmalik.pythonanywhere.com']
 
 
 # Application definition
@@ -91,9 +92,9 @@ WSGI_APPLICATION = 'family_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default="sqlite:///db.sqlite3"
-    )
+    'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    
 }
 
 
@@ -136,4 +137,3 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
